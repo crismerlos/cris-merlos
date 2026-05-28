@@ -7,14 +7,134 @@
   ---------------------------------------------------------- */
   const heroImg     = document.querySelector('.hero-imagem');
   const heroContent = document.querySelector('.hero-conteudo');
+  const menu        = document.querySelector('.menu');
+  const menuToggle  = document.querySelector('.menu-toggle');
+
+  if (menu && menuToggle) {
+    menuToggle.addEventListener('click', () => {
+      const isOpen = menu.classList.toggle('ativo');
+      menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      menuToggle.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
+      menuToggle.querySelector('.material-symbols-outlined').textContent = isOpen ? 'close' : 'menu';
+    });
+
+    menu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menu.classList.remove('ativo');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-label', 'Abrir menu');
+        menuToggle.querySelector('.material-symbols-outlined').textContent = 'menu';
+      });
+    });
+  }
+
+  const carousel = document.querySelector('.carrossel-galeria');
+  if (carousel) {
+    const track = carousel.querySelector('.carrossel-trilho');
+    const slides = Array.from(carousel.querySelectorAll('.carrossel-slide'));
+    const prevBtn = carousel.querySelector('.carrossel-anterior');
+    const nextBtn = carousel.querySelector('.carrossel-proximo');
+    const dotsWrapper = carousel.querySelector('.carrossel-indicadores');
+    let currentIndex = 0;
+    let autoplayId = null;
+    const autoplayDelay = 4000;
+
+    function getVisibleSlides() {
+      if (window.innerWidth <= 768) return 1;
+      if (window.innerWidth <= 1024) return 2;
+      return 4;
+    }
+
+    function getMaxIndex() {
+      return Math.max(slides.length - getVisibleSlides(), 0);
+    }
+
+    function getStepSize() {
+      if (!slides.length) return 0;
+      const gap = parseFloat(getComputedStyle(track).gap) || 0;
+      return slides[0].getBoundingClientRect().width + gap;
+    }
+
+    function buildDots() {
+      dotsWrapper.innerHTML = '';
+      const totalDots = getMaxIndex() + 1;
+
+      for (let i = 0; i < totalDots; i++) {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.setAttribute('aria-label', `Mostrar imagem ${i + 1}`);
+        dot.addEventListener('click', () => {
+          currentIndex = i;
+          updateCarousel();
+          startAutoplay();
+        });
+        dotsWrapper.appendChild(dot);
+      }
+    }
+
+    function updateCarousel() {
+      currentIndex = Math.min(currentIndex, getMaxIndex());
+      track.style.transform = `translateX(-${currentIndex * getStepSize()}px)`;
+
+      dotsWrapper.querySelectorAll('button').forEach((dot, index) => {
+        dot.classList.toggle('ativo', index === currentIndex);
+        dot.setAttribute('aria-current', index === currentIndex ? 'true' : 'false');
+      });
+    }
+
+    function nextSlide() {
+      currentIndex = currentIndex === getMaxIndex() ? 0 : currentIndex + 1;
+      updateCarousel();
+    }
+
+    function startAutoplay() {
+      stopAutoplay();
+      autoplayId = setInterval(nextSlide, autoplayDelay);
+    }
+
+    function stopAutoplay() {
+      if (autoplayId) {
+        clearInterval(autoplayId);
+        autoplayId = null;
+      }
+    }
+
+    prevBtn.addEventListener('click', () => {
+      currentIndex = currentIndex === 0 ? getMaxIndex() : currentIndex - 1;
+      updateCarousel();
+      startAutoplay();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      nextSlide();
+      startAutoplay();
+    });
+
+    window.addEventListener('resize', () => {
+      buildDots();
+      updateCarousel();
+      startAutoplay();
+    });
+
+    buildDots();
+    updateCarousel();
+    startAutoplay();
+  }
 
   function onParallaxScroll() {
+    if (window.innerWidth <= 768) {
+      if (heroImg)     heroImg.style.transform     = '';
+      if (heroContent) heroContent.style.transform = '';
+      return;
+    }
+
     const y = window.scrollY;
     if (heroImg)     heroImg.style.transform     = `translateY(${y * 0.45}px)`;
     if (heroContent) heroContent.style.transform = `translateY(${y * 0.18}px)`;
   }
 
   window.addEventListener('scroll', onParallaxScroll, { passive: true });
+  window.addEventListener('resize', onParallaxScroll);
 
 
   /* ----------------------------------------------------------
