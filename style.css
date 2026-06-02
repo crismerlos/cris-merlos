@@ -842,7 +842,7 @@ button {
     .grid-servicos,
     .grid-beneficios,
     .grid-depoimentos {
-        grid-template-columns: 1fr;
+        grid-template-columns: fr;
     }
 
     .estatisticas {
@@ -976,13 +976,12 @@ button {
         font-size: 13px;
         max-width: 280px;
         font-weight: bold;
-
     }
 
     .hero-botoes {
         flex-direction: column;
         align-items: center;
-        gap: 10px;
+        
     }
 
     .hero-botoes .botao {
@@ -990,6 +989,38 @@ button {
         max-width: 260px;
         padding: 13px 20px;
         font-size: 13px;
+    }
+
+    .grid-servicos{
+        grid-template-columns: repeat(2, 2fr);
+    }
+
+    .card-servico{
+        max-width: 200px;
+        max-height: 250px;
+    }
+
+    .icone-servico {
+        margin-top: 0px;
+        width: 50px;
+        height: 50px;
+    }
+
+    .icone-servico span {
+        font-size: 22px;
+    }
+
+    .preco {
+        font-weight: 400;
+        font-size: 15px;
+    }
+
+    .card-servico h3 {
+        font-size: 14px;
+    }
+
+    .card-servico p {
+        font-size: 12px;
     }
 
     .botao {
