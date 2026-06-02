@@ -21,7 +21,7 @@
         <div class="container cabecalho-conteudo">
 
             <div class="logo">
-                Cris Merlos
+                <img src="imagens/logo-cris-merlos.png" alt="Cris Merlos Nail Designer">
             </div>
 
             <nav class="menu">
@@ -30,6 +30,10 @@
                 <a href="#galeria">Galeria</a>
                 <a href="#depoimentos">Depoimentos</a>
             </nav>
+
+            <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
 
             <a href="https://wa.me/5544988468608" target="_blank" class="botao botao-primario">
                 Agendar
@@ -190,11 +194,57 @@
                     </a>
                 </div>
 
-                <div class="grid-galeria">
-                    <img src="imagens/galeria1.jpg" alt="Galeria 1">
-                    <img src="imagens/galeria2.jpg" alt="Galeria 2">
-                    <img src="imagens/galeria3.jpg" alt="Galeria 3">
-                    <img src="imagens/galeria4.jpg" alt="Galeria 4">
+                <div class="carrossel-galeria" aria-label="Galeria de trabalhos">
+                    <button class="carrossel-botao carrossel-anterior" type="button" aria-label="Imagem anterior">
+                        <span class="material-symbols-outlined">chevron_left</span>
+                    </button>
+
+                    <div class="carrossel-viewport">
+                        <div class="carrossel-trilho">
+                            <div class="carrossel-slide">
+                                <img src="imagens/galeria1.jpg" alt="Trabalho de nail design 1">
+                            </div>
+                            <div class="carrossel-slide">
+                                <img src="imagens/galeria2.jpg" alt="Trabalho de nail design 2">
+                            </div>
+                            <div class="carrossel-slide">
+                                <img src="imagens/galeria3.jpg" alt="Trabalho de nail design 3">
+                            </div>
+                            <div class="carrossel-slide">
+                                <img src="imagens/galeria4.jpg" alt="Trabalho de nail design 4">
+                            </div>
+                            <div class="carrossel-slide">
+                                <img src="imagens/galeria5.jpeg" alt="Trabalho de nail design 5">
+                            </div>
+                            <div class="carrossel-slide">
+                                <img src="imagens/galeria6.jpeg" alt="Trabalho de nail design 6">
+                            </div>
+                            <div class="carrossel-slide">
+                                <img src="imagens/galeria7.jpeg" alt="Trabalho de nail design 7">
+                            </div>
+                            <div class="carrossel-slide">
+                                <img src="imagens/galeria8.jpeg" alt="Trabalho de nail design 8">
+                            </div>
+                            <div class="carrossel-slide">
+                                <img src="imagens/galeria9.jpeg" alt="Trabalho de nail design 9">
+                            </div>
+                            <div class="carrossel-slide">
+                                <img src="imagens/galeria10.jpeg" alt="Trabalho de nail design 10">
+                            </div>
+                            <div class="carrossel-slide">
+                                <img src="imagens/galeria11.jpeg" alt="Trabalho de nail design 11">
+                            </div>
+                            <div class="carrossel-slide">
+                                <img src="imagens/galeria12.jpeg" alt="Trabalho de nail design 12">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="carrossel-botao carrossel-proximo" type="button" aria-label="Próxima imagem">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
+
+                    <div class="carrossel-indicadores" aria-label="Selecionar imagem da galeria"></div>
                 </div>
 
             </div>
@@ -385,6 +435,8 @@
 
         </div>
     </footer>
+    
+    <script src="script.js"></script>
 
 </body>
 
