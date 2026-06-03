@@ -45,8 +45,8 @@
 
     --gradiente-hero: linear-gradient(
         90deg,
-        rgba(255, 248, 250, 0.95),
-        rgba(255, 248, 250, 0.55)
+        rgba(255, 248, 250, 0.98),
+        rgba(255, 248, 250, 0.72)
     );
 
     --gradiente-secao-suave: linear-gradient(
@@ -181,7 +181,62 @@ button {
     height: 100%;
     object-fit: cover;
     object-position: center;
-    opacity: 0.5;
+    opacity: 0.28;
+}
+
+.hero-traco {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    z-index: 1;
+    width: 100%;
+    height: 260px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    opacity: 0.58;
+}
+
+.hero-traco path {
+    fill: none;
+    stroke: url("#hero-traco-gradiente");
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+}
+
+.hero-traco-linha {
+    stroke-width: 4;
+    animation: desenhar-traco-hero 5.4s linear 280ms forwards;
+}
+
+@keyframes desenhar-traco-hero {
+    0% {
+        stroke-dashoffset: 1;
+    }
+
+    18% {
+        stroke-dashoffset: 0.88;
+    }
+
+    45% {
+        stroke-dashoffset: 0.34;
+    }
+
+    72% {
+        stroke-dashoffset: 0.18;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-traco path {
+        animation: none;
+        stroke-dashoffset: 0;
+    }
 }
 
 .hero-overlay {
@@ -206,26 +261,49 @@ button {
     font-weight: 700;
     letter-spacing: 4px;
     text-transform: uppercase;
+    text-shadow: 0 1px 14px rgba(255, 248, 250, 0.65);
 }
 
 .hero h1 {
     font-size: 52px;
     line-height: 1.1;
-    font-family: "Playfair Display", serif;
+    font-family: "Cormorant Garamond", "Playfair Display", serif;
+    font-weight: 600;
     margin-bottom: 16px;
     color: var(--cor-principal-escura);
+    text-shadow: 0 2px 18px rgba(255, 248, 250, 0.7);
+}
+
+.hero-titulo,
+.hero-descricao {
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(2px);
+    transition:
+        opacity 900ms ease,
+        transform 900ms cubic-bezier(0.22, 1, 0.36, 1),
+        filter 900ms ease;
+}
+
+.hero-titulo.titulo-visivel,
+.hero-descricao.descricao-visivel {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
 }
 
 .hero h1 span {
-    color: var(--cor-texto-principal);
+    color: var(--cor-principal-escura);
 }
 
 .hero p {
     font-size: 16px;
     line-height: 1.7;
     margin-bottom: 32px;
-    color: var(--cor-texto-secundario);
+    color: var(--cor-texto-principal);
     max-width: 460px;
+    font-weight: 500;
+    text-shadow: 0 1px 14px rgba(255, 248, 250, 0.65);
 }
 
 .hero-botoes {
@@ -312,7 +390,8 @@ button {
 
 .grid-servicos {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, minmax(220px, 1fr));
+    justify-content: center;
     gap: 25px;
 }
 
@@ -663,7 +742,6 @@ button {
 /* RESPONSIVO */
 
 @media (max-width: 1280px) {
-    .grid-servicos,
     .grid-beneficios {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -724,11 +802,11 @@ button {
 
 @media (max-width: 768px) {
     .container {
-        padding: 0 18px;
+        padding: 0 20px;
     }
 
     .secao {
-        padding: 64px 0;
+        padding: 60px 0;
     }
 
     .cabecalho {
@@ -749,7 +827,7 @@ button {
         top: 76px;
         left: 0;
         width: 100%;
-        padding: 22px 18px 26px;
+        padding: 20px 20px 24px;
         background-color: var(--cor-fundo-header);
         border-bottom: 1px solid var(--cor-borda);
         box-shadow: var(--sombra-card);
@@ -795,7 +873,7 @@ button {
     }
 
     .hero-conteudo {
-        padding: 48px 0 52px;
+        padding: 44px 0 48px;
         text-align: center;
         display: flex;
         flex-direction: column;
@@ -808,6 +886,12 @@ button {
 
     .hero-imagem {
         object-position: 62% center;
+    }
+
+    .hero-traco {
+        top: 47%;
+        height: 220px;
+        opacity: 0.46;
     }
 
     .subtitulo {
@@ -831,7 +915,7 @@ button {
     .hero-botoes {
         flex-direction: row;
         justify-content: center;
-        gap: 10px;
+        gap: 12px;
         width: 100%;
     }
 
@@ -845,12 +929,13 @@ button {
     .grid-servicos,
     .grid-beneficios,
     .grid-depoimentos {
-        grid-template-columns: fr;
+        grid-template-columns: 1fr;
+        gap: 22px;
     }
 
     .estatisticas {
         flex-direction: column;
-        gap: 20px;
+        gap: 18px;
     }
 
     .rodape-info {
@@ -858,7 +943,7 @@ button {
     }
 
     .titulo-secao {
-        margin-bottom: 40px;
+        margin-bottom: 36px;
     }
 
     .titulo-secao h2,
@@ -870,7 +955,7 @@ button {
     }
 
     .grid-sobre {
-        gap: 36px;
+        gap: 32px;
     }
 
     .sobre-imagem img,
@@ -882,12 +967,12 @@ button {
 
     .card-servico,
     .card-depoimento {
-        padding: 30px 22px;
+        padding: 28px 20px;
     }
 
     .topo-galeria {
-        gap: 20px;
-        margin-bottom: 32px;
+        gap: 18px;
+        margin-bottom: 30px;
     }
 
     .botao-link {
@@ -900,11 +985,11 @@ button {
     }
 
     .carrossel-slide img {
-        height: 300px;
+        height: 420px;
     }
 
     .carrossel-botao {
-        top: 150px;
+        top: 210px;
         width: 42px;
         height: 42px;
     }
@@ -918,11 +1003,19 @@ button {
     }
 
     .grid-beneficios {
-        gap: 24px;
+        gap: 16px;
     }
 
     .beneficio {
-        padding-bottom: 8px;
+        background-color: rgba(255, 248, 250, 0.78);
+        border: 1px solid rgba(248, 215, 223, 0.75);
+        border-radius: 16px;
+        padding: 22px 18px;
+        box-shadow: 0 8px 22px rgba(92, 47, 60, 0.06);
+    }
+
+    .beneficio span {
+        margin-bottom: 10px;
     }
 
     .destaque {
@@ -930,7 +1023,7 @@ button {
     }
 
     .cta {
-        padding: 50px 30px;
+        padding: 46px 26px;
         border-radius: 24px;
     }
 
@@ -939,39 +1032,39 @@ button {
     }
 
     .rodape {
-        padding: 56px 0 28px;
+        padding: 52px 0 28px;
     }
 
     .rodape-topo {
-        gap: 36px;
-        margin-bottom: 36px;
+        gap: 32px;
+        margin-bottom: 32px;
     }
 
     .rodape-links {
         flex-direction: column;
-        gap: 28px;
+        gap: 24px;
     }
 }
 
 @media (max-width: 480px) {
     .container {
-        padding: 0 16px;
+        padding: 0 18px;
     }
 
     .secao {
-        padding: 56px 0;
+        padding: 52px 0;
     }
 
     .hero-conteudo {
-        padding: 36px 0 44px;
+        padding: 32px 0 40px;
     }
 
     .hero h1 {
         font-size: 50px;
         line-height: 1.1;
         padding-top: 0px;
-        padding-left: 25px;
-        padding-right: 25px;
+        padding-left: 12px;
+        padding-right: 12px;
         padding-bottom: 15px;
     }
 
@@ -981,10 +1074,16 @@ button {
         font-weight: bold;
     }
 
+    .hero-traco {
+        top: 46%;
+        height: 190px;
+        opacity: 0.4;
+    }
+
     .hero-botoes {
         flex-direction: column;
         align-items: center;
-        
+        gap: 12px;
     }
 
     .hero-botoes .botao {
@@ -994,17 +1093,20 @@ button {
         font-size: 13px;
     }
 
-    .grid-servicos{
-        grid-template-columns: repeat(2, 2fr);
+    .grid-servicos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
     }
 
-    .card-servico{
-        max-width: 200px;
-        max-height: 250px;
+    .card-servico {
+        max-width: none;
+        max-height: none;
+        padding: 24px 14px;
     }
 
     .icone-servico {
-        margin-top: 0px;
+        margin-top: 0;
+        margin-bottom: 14px;
         width: 50px;
         height: 50px;
     }
@@ -1024,6 +1126,11 @@ button {
 
     .card-servico p {
         font-size: 12px;
+        margin-bottom: 0;
+    }
+
+    .beneficio {
+        padding: 20px 16px;
     }
 
     .botao {
@@ -1038,30 +1145,61 @@ button {
     }
 
     .carrossel-slide img {
-        height: 260px;
+        height: 390px;
     }
 
     .carrossel-botao {
-        top: 130px;
+        top: 195px;
     }
 
     .cta {
-        padding: 40px 22px;
+        padding: 36px 20px;
     }
 
     .cta p {
         font-size: 16px;
     }
+
+    .grid-sobre {
+        gap: 28px;
+    }
+
+    .estatisticas {
+        gap: 16px;
+    }
+
+    .topo-galeria {
+        margin-bottom: 28px;
+    }
+
+    .rodape-topo {
+        gap: 28px;
+        margin-bottom: 28px;
+    }
 }
 
 @media (max-width: 360px) {
+    .container {
+        padding: 0 16px;
+    }
+
+    .secao {
+        padding: 48px 0;
+    }
+
     .logo {
         width: 90px;
         height: 56px;
     }
 
+    .hero-conteudo {
+        padding: 28px 0 36px;
+    }
+
     .hero h1 {
         font-size: 24px;
+        padding-left: 6px;
+        padding-right: 6px;
     }
 
     .hero p {
@@ -1069,10 +1207,27 @@ button {
         max-width: 240px;
     }
 
+    .hero-traco {
+        height: 170px;
+    }
+
     .hero-botoes .botao {
         max-width: 220px;
         font-size: 12px;
         padding: 12px 16px;
+    }
+
+    .grid-servicos {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .card-servico {
+        padding: 24px 18px;
+    }
+
+    .beneficio {
+        padding: 18px 15px;
     }
 
     .titulo-secao h2,
@@ -1084,5 +1239,13 @@ button {
 
     .estatistica strong {
         font-size: 28px;
+    }
+
+    .cta {
+        padding: 32px 18px;
+    }
+
+    .rodape-links {
+        gap: 20px;
     }
 }
