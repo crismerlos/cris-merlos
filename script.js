@@ -196,7 +196,7 @@
      2. CTA FLUTUANTE DO WHATSAPP
      Aparece após 300 px de scroll, com pulse animation
   ---------------------------------------------------------- */
-  const WA_URL = 'https://wa.me/5544988468608';
+  const WA_URL = 'https://wa.me/5544988468608?text=Olá%2C%20gostaria%20de%20agendar%20um%20horário%20para%20fazer%20as%20unhas.%20Poderia%20me%20informar%20os%20horários%20disponíveis%3F';
 
   function createWhatsappFAB() {
     const fab = document.createElement('a');
