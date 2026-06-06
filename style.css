@@ -474,7 +474,7 @@ button {
 }
 
 .sobre-imagem img {
-    height: 460px;
+    height: 500px;
     object-fit: cover;
     object-position: center;
     border-radius: 30px;
